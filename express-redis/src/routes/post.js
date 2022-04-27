@@ -1,0 +1,10 @@
+const express = require('express');
+const router = express.Router();
+const verifyToken = require('../middleware/verifyToken');
+const postController = require('../controllers/postController');
+router.get('/posts', verifyToken, postController.getPosts);
+router.get('/posts/:id', verifyToken, postController.getPost);
+router.put('/posts/:id', verifyToken, postController.updatePost);
+router.delete('/posts/:id', verifyToken, postController.deletePost);
+router.post('/posts/create', verifyToken, postController.createPost);
+module.exports = router;

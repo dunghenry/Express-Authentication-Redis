@@ -1,6 +1,11 @@
 const express = require('express');
 const router = express.Router();
+const verifyToken = require('../middleware/verifyToken');
 const authController = require('../controllers/authController');
 router.post('/auth/register', authController.register);
 router.post('/auth/login', authController.login);
+router.post('/auth/refresh', verifyToken, authController.refreshToken);
+router.put('/auth/:id', verifyToken, authController.updateInfo);
+router.delete('/auth/:id', verifyToken, authController.deleteUser);
+router.post('/auth/logout', verifyToken, authController.logout);
 module.exports = router;
